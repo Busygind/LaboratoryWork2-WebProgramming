@@ -50,7 +50,7 @@ function validateVariables(x, y, r) {
 }
 
 function validateTextField() {
-    $('.y-text').on('input', function() {
+    $('.y-text').on('input', function () {
         $(this).val($(this).val().replace(/[^.-\d]/, ''))
     });
 }

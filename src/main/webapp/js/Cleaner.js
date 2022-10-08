@@ -18,7 +18,7 @@ function cleanTable() {
         type: "PUT",
         url: "controller-servlet",
         async: false,
-        error: function() {
+        error: function () {
             alert("can't clear table");
         }
     });

@@ -11,14 +11,23 @@ function createTriangle(board, r) {
     let pt1 = board.create('point', [0, 0], {name: '', fixed: true, size: 0});
     let pt2 = board.create('point', [-r, 0], {name: '', fixed: true, size: 0});
     let pt3 = board.create('point', [0, -r], {name: '', fixed: true, size: 0});
-    return board.create('polygon', [pt1, pt2, pt3], {fillColor: '#fabf4d', fillOpacity: 1, borders: {strokeColor: 'black'}});
+    return board.create('polygon', [pt1, pt2, pt3], {
+        fillColor: '#fabf4d',
+        fillOpacity: 1,
+        borders: {strokeColor: 'black'}
+    });
 }
 
 function createCircle(board, r) {
     let cen = board.create('point', [0, 0], {name: '', fixed: true, size: 0});
     let pt1 = board.create('point', [r, 0], {name: '', fixed: true, size: 0});
     let pt2 = board.create('point', [0, r], {name: '', fixed: true, size: 0});
-    return board.create('sector', [cen, pt1, pt2], {name: '', fillColor: '#fabf4d', fillOpacity: 1, strokeColor: 'black'});
+    return board.create('sector', [cen, pt1, pt2], {
+        name: '',
+        fillColor: '#fabf4d',
+        fillOpacity: 1,
+        strokeColor: 'black'
+    });
 }
 
 $(document).ready(function () {
@@ -41,6 +50,7 @@ function drawObjects(drawnObjects, board, r) {
 }
 
 var globalBoard;
+
 function drawBoard() {
 
     let board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [-6, 6, 6, -6], axis: true, showCopyright: false});
