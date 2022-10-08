@@ -2,6 +2,7 @@ package busygind.servlets;
 
 import busygind.entities.Hit;
 import busygind.handlers.ContextHandler;
+import busygind.handlers.Validator;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.servlet.ServletContext;
@@ -53,8 +54,8 @@ public class AreaCheckServlet extends HttpServlet {
             }
         } else {
             // request sender isn't controller
-             pw.write("Incorrect sender!");
-             pw.flush();
+            pw.write("Incorrect sender!");
+            pw.flush();
         }
     }
 

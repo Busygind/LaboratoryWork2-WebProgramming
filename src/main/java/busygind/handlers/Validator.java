@@ -1,4 +1,4 @@
-package busygind.servlets;
+package busygind.handlers;
 
 public class Validator {
 
