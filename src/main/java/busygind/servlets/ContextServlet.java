@@ -17,9 +17,10 @@ public class ContextServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // upload hits from context
         PrintWriter printWriter = response.getWriter();
         ObjectMapper om = new ObjectMapper();
-        String responseBody = om.writeValueAsString(contextHandler.getDataFromContext(request.getServletContext()));
+        String responseBody = om.writeValueAsString(contextHandler.getHitsFromContext(request.getServletContext()));
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
@@ -29,8 +30,8 @@ public class ContextServlet extends HttpServlet {
 
     @Override
     public void doPut(HttpServletRequest request, HttpServletResponse response) {
-        contextHandler.setContextData(request.getServletContext(), new ArrayList<>());
-        System.out.println(contextHandler.getDataFromContext(request.getServletContext()));
+        // delete hits from context
+        contextHandler.setHitsToContext(request.getServletContext(), new ArrayList<>());
     }
 
 }
