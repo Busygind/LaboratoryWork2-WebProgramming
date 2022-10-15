@@ -18,22 +18,24 @@ import java.util.List;
 public class AreaCheckServlet extends HttpServlet {
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) {
-
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter pw = response.getWriter();
+        pw.write("Can't handle POST-request");
+        pw.flush();
     }
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ServletContext context = request.getServletContext();
         ContextHandler contextHandler = new ContextHandler();
-        List<Hit> hits = contextHandler.getDataFromContext(context);
+        List<Hit> hits = contextHandler.getHitsFromContext(context);
 
         ObjectMapper om = new ObjectMapper();
 
         PrintWriter pw = response.getWriter();
-        if (request.getAttribute("controller-id") != null &&
-                context.getAttribute("sender-id") != null &&
-                request.getAttribute("controller-id").equals(context.getAttribute("sender-id"))) {
+        //if (request.getAttribute("controller-id") != null &&
+                //context.getAttribute("sender-id") != null &&
+                //request.getAttribute("controller-id").equals(context.getAttribute("sender-id"))) {
 
             try {
                 Validator validator = new Validator(request.getParameter("x-value"), request.getParameter("y-value"),
@@ -42,7 +44,7 @@ public class AreaCheckServlet extends HttpServlet {
                 hit.setResult(checkHit(hit));
 
                 hits.add(hit);
-                contextHandler.setContextData(context, hits);
+                contextHandler.setHitsToContext(context, hits);
 
                 String responseBody = om.writeValueAsString(hit);
                 response.setContentType("application/json");
@@ -52,11 +54,11 @@ public class AreaCheckServlet extends HttpServlet {
             } catch (NumberFormatException ignored) {
 
             }
-        } else {
-            // request sender isn't controller
-            pw.write("Incorrect sender!");
-            pw.flush();
-        }
+        //} else {
+        //    // request sender isn't controller
+        //    pw.write("Incorrect sender!");
+        //    pw.flush();
+        //}
     }
 
     private boolean checkHit(Hit hit) {

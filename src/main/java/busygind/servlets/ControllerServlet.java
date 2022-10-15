@@ -33,9 +33,9 @@ public class ControllerServlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getMethod().equals("GET") && parametersAreExists(request)) {
-            UUID senderUUID = UUID.randomUUID();
-            request.getServletContext().setAttribute("sender-id", senderUUID);
-            request.setAttribute("controller-id", senderUUID);
+            //UUID senderUUID = UUID.randomUUID();
+            //request.getServletContext().setAttribute("sender-id", senderUUID);
+            //request.setAttribute("controller-id", senderUUID);
             request.getRequestDispatcher("/area-check-servlet").forward(request, response);
         } else if (request.getMethod().equals("POST") || request.getMethod().equals("PUT")) {
             request.getRequestDispatcher("/context-servlet").forward(request, response);
