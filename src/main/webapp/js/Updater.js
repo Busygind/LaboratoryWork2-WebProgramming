@@ -1,5 +1,4 @@
 function update(x, y, r) {
-
     if (validateVariables(x, y, r)) {
         $.ajax({
             type: "GET",
@@ -12,34 +11,22 @@ function update(x, y, r) {
             },
             success: function (data) {
                 //console.log(data);
-                addNewRowInTable(data);
+                addNewRowInTable(data["hit"]);
                 if (globalBoard !== undefined) {
-                    drawPoint(globalBoard, data["x"], data["y"], data["result"]);
+                    drawPoint(globalBoard, data["hit"]["x"], data["hit"]["y"], data["hit"]["result"]);
                 }
+                updateCounter(data)
             },
             error: function () {
                 alert("Smth went wrong (update)");
             }
         });
-
-        console.log(x, y, r);
     }
 }
 
-function getDataFromServer() {
-    $.ajax({
-        type: "POST",
-        url: "controller-servlet",
-        async: false,
-        dataType: "json",
-        data: {},
-        success: function (data) {
-            console.log(data);
-            fillTable(data);
-        },
-        error: function () {
-            alert("can't get data from server");
-        }
-    });
+function updateCounter(data) {
+    let counter = data["actionCounter"]
+    let info = "<span>Count of servlets actions: " + counter + " </span>"
+    $(".actionCounter").html(info);
 }
 
