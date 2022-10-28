@@ -183,6 +183,14 @@ h2 {
     margin: 0 3% 1% 10%;
 }
 
+.actionCounter {
+    margin: 1% auto;
+    height: 2.7vh;
+    font-family: inherit;
+    font-size: 130%;
+    text-align: center;
+}
+
 .validationInfo {
     margin: 1% auto;
     text-align: center;
