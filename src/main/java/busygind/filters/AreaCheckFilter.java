@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebFilter(value = "/area-check-servlet")
+@WebFilter(filterName = "area-check-filter", value = "/area-check-servlet")
 public class AreaCheckFilter implements Filter {
 
     @Override

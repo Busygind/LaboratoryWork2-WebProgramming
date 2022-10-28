@@ -12,6 +12,7 @@ public class Validator {
         this.r = Float.parseFloat(r);
     }
 
+    // actually useless but...
     public boolean dataIsValid() {
         return xIsValid() && yIsValid() && rIsValid();
     }

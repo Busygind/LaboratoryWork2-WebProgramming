@@ -13,6 +13,10 @@ public class ContextHandler {
         return hits == null || hits.isEmpty() ? new ArrayList<>() : hits;
     }
 
+    public Object getIntegerAttributeFromContext(ServletContext context, String attrName) {
+        return (context.getAttribute(attrName) == null) ? 0 : context.getAttribute(attrName);
+    }
+
     public void setHitsToContext(ServletContext context, List<Hit> hits) {
         context.setAttribute("hits", hits);
     }

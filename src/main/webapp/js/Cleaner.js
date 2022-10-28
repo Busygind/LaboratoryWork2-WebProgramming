@@ -17,10 +17,7 @@ function cleanTable() {
     $.ajax({
         type: "PUT",
         url: "controller-servlet",
-        async: false,
-        error: function () {
-            alert("can't clear table");
-        }
+        async: false
     });
 }
 

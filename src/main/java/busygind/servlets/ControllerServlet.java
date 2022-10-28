@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.UUID;
 
 @WebServlet(name = "controller-servlet", value = "/controller-servlet")
 public class ControllerServlet extends HttpServlet {
@@ -38,7 +37,7 @@ public class ControllerServlet extends HttpServlet {
             //request.setAttribute("controller-id", senderUUID);
             request.getRequestDispatcher("/area-check-servlet").forward(request, response);
         } else if (request.getMethod().equals("POST") || request.getMethod().equals("PUT")) {
-            request.getRequestDispatcher("/context-servlet").forward(request, response);
+            request.getRequestDispatcher("/hits-upload-servlet").forward(request, response);
         }
 
     }

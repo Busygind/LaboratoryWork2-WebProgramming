@@ -1,5 +1,6 @@
 package busygind.servlets;
 
+import busygind.entities.DataTransferObject;
 import busygind.entities.Hit;
 import busygind.handlers.ContextHandler;
 import busygind.handlers.Validator;
@@ -34,26 +35,29 @@ public class AreaCheckServlet extends HttpServlet {
 
         PrintWriter pw = response.getWriter();
         //if (request.getAttribute("controller-id") != null &&
-                //context.getAttribute("sender-id") != null &&
-                //request.getAttribute("controller-id").equals(context.getAttribute("sender-id"))) {
+        //context.getAttribute("sender-id") != null &&
+        //request.getAttribute("controller-id").equals(context.getAttribute("sender-id"))) {
 
-            try {
-                Validator validator = new Validator(request.getParameter("x-value"), request.getParameter("y-value"),
-                        request.getParameter("r-value"));
-                Hit hit = new Hit(validator.getX(), validator.getY(), validator.getR(), request.getParameter("timezone"));
-                hit.setResult(checkHit(hit));
+        try {
+            Validator validator = new Validator(request.getParameter("x-value"), request.getParameter("y-value"),
+                    request.getParameter("r-value"));
+            Hit hit = new Hit(validator.getX(), validator.getY(), validator.getR(), request.getParameter("timezone"));
+            hit.setResult(checkHit(hit));
 
-                hits.add(hit);
-                contextHandler.setHitsToContext(context, hits);
+            hits.add(hit);
+            contextHandler.setHitsToContext(context, hits);
 
-                String responseBody = om.writeValueAsString(hit);
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                pw.write(responseBody);
-                pw.flush();
-            } catch (NumberFormatException ignored) {
+            DataTransferObject dataTransferObject = new DataTransferObject();
+            dataTransferObject.setHit(hit);
+            dataTransferObject.setActionCounter((int) contextHandler.getIntegerAttributeFromContext(context, "count-of-servlets-action"));
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
 
-            }
+            pw.write(dataTransferObject.toJSONString());
+        } catch (NumberFormatException e) {
+            pw.write("Incorrect coordinates or radius :(");
+        }
+        pw.flush();
         //} else {
         //    // request sender isn't controller
         //    pw.write("Incorrect sender!");
